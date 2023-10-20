@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/api-exemplo', ApiController::class);
 Route::get('/api-exemplo/{id}', ApiController::class);
+Route::get('/api-placeholder', [App\Http\Controllers\ApiController::class, 'getPlaceholder']);
 
 Route::get('/api-resposta', [App\Http\Controllers\QuestionController::class, 'fetchInsert']);
 Route::get('/', [App\Http\Controllers\QuestionController::class, 'show']);
+

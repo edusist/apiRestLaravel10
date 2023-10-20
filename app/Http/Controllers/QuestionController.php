@@ -47,4 +47,6 @@ class QuestionController extends Controller
 
         return view('welcome', $data);
     }
+
+
 }

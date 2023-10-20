@@ -9,6 +9,7 @@ use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Stream\Stream;
+use Illuminate\Support\Collection;
 
 class ApiController extends Controller
 {
@@ -17,7 +18,7 @@ class ApiController extends Controller
 
         $servico = new SportScoreService();
 
-      
+
 
         //Busca os esportes
         // $response = $servico
@@ -25,19 +26,19 @@ class ApiController extends Controller
         //     ->get();
 
 
-          $sport1= $servico
+        $sport1 = $servico
             ->sports()
             ->get()
             ->first();
-            // dd($sport1);
+        // dd($sport1);
 
 
 
         //Busca os Times do esporte
         $response = $servico
-                ->teams()//HasTeams Estância da Classe Teams
-                ->fromSports($sport1) 
-                ->get();
+            ->teams() //HasTeams Estância da Classe Teams
+            ->fromSports($sport1)
+            ->get();
 
         // dd($response);
 
@@ -48,12 +49,12 @@ class ApiController extends Controller
             print_r($valor->name);
             echo "<br>";
             print_r($valor->slug);
-            echo "<br>";       
+            echo "<br>";
             print_r($valor->country);
             echo "<br>";
             print_r($valor->logo);
             echo "<br>";
-            print_r($valor->name_translations);      
+            print_r($valor->name_translations);
             echo "</pre>";
         }
 
@@ -89,6 +90,26 @@ class ApiController extends Controller
         //     }
         // }
 
+    }
+
+    public function getPlaceholder()
+    {
+
+        $resposta = ApiExemploFacades::posts('/posts')
+            ->object();
+
+
+        foreach ($resposta  as $value) {
+
+            echo "<pre>";
+            print_r($value->id);
+            echo "<br>";
+            print_r($value->title);
+            echo "<br>";
+            print_r($value->body);
+            echo "<br>";
+            echo "</pre>";
+        }
     }
 }
   // ])->get('https://sportscore1.p.rapidapi.com/sports/1/teams?page=3&per_page=10');
